@@ -19,7 +19,7 @@ const ENV = 'DEV';
 const app = express();
 app.get('/', (req, res) => {
   res.statusCode = 200;
-  const msg = 'Hello from from Primus Learning, this was awesome';
+  const msg = 'Hello from from Timothy Java Learning, this was awesome';
   res.send(getPage(msg));
 });
 
@@ -85,6 +85,7 @@ function getPage(message) {
     + "    <p>ENVIRONMENT: " + ENV + "</p>\n"
     + "  </div>\n"
     + "  <div class=\"middle\">\n"
+    + "    <h1>AWS EKS Project Example</h1>\n"
     + "    <h1>Host/container name</h1>\n"
     + "    <hr>\n"
     + "    <p>" + OS.hostname() + "</p>\n"
