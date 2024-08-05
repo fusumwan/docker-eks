@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: dockereks
-          image: 879409995620.dkr.ecr.ap-southeast-2.amazonaws.com/dockereks:1.1
+          image: 879409995620.dkr.ecr.ap-southeast-2.amazonaws.com/dockereks:1.1a
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
