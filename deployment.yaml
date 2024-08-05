@@ -37,7 +37,7 @@ spec:
       containers:
         # Defines a container within the pod
         - name: dockereks  # The name of the container
-          image: 879409995620.dkr.ecr.ap-southeast-2.amazonaws.com/dockereks:1.1abbb  # The Docker image for the container
+          image: 879409995620.dkr.ecr.ap-southeast-2.amazonaws.com/dockereks:1.1abbbb  # The Docker image for the container
           imagePullPolicy: Always  # Specifies to always pull the image, ensuring the latest version is used
           ports:
             # Defines a list of ports exposed by the container

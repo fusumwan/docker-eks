@@ -45,7 +45,7 @@ jobs:
       env:
         REGISTRY: ${{ steps.login-ecr.outputs.registry }}  # The registry URL output from the login-ecr step
         REPOSITORY: dockereks  # The name of the repository in ECR
-        IMAGE_TAG: 1.1abbb  # The tag for the Docker image
+        IMAGE_TAG: 1.1abbbb  # The tag for the Docker image
       # Runs shell commands to build, tag, and push the Docker image
       run: |
         docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .  # Builds the Docker image

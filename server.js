@@ -19,7 +19,7 @@ const ENV = 'DEV';
 const app = express();
 app.get('/', (req, res) => {
   res.statusCode = 200;
-  const msg = 'Timothy Java Channel';
+  const msg = '[Timothy Java Channel]';
   res.send(getPage(msg));
 });
 
