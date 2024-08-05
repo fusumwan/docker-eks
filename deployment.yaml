@@ -1,22 +1,44 @@
+# Specifies the API version for the deployment resource
 apiVersion: apps/v1
+
+# Defines the type of Kubernetes resource, in this case, a Deployment
 kind: Deployment
+
+# Metadata provides information about the deployment
 metadata:
+  # The name of the deployment, used to identify the deployment within the namespace
   name: dockereks
+  # Labels are key/value pairs that are used to identify and group objects
   labels:
     app: dockereks
+
+# The specification of the desired behavior of the deployment
 spec:
+  # The number of desired pod replicas
   replicas: 1
+
+  # The selector is used to determine which pods the deployment applies to
   selector:
+    # matchLabels specifies the label that the deployment uses to select pods
     matchLabels:
       app: dockereks
+
+  # The template describes the pods that will be created by the deployment
   template:
+    # Metadata for the pods created by the deployment
     metadata:
+      # Labels for the pods created by the deployment
       labels:
         app: dockereks
+
+    # The specification of the pod's contents
     spec:
+      # The containers that will be run in the pods
       containers:
-        - name: dockereks
-          image: 879409995620.dkr.ecr.ap-southeast-2.amazonaws.com/dockereks:1.1ab
-          imagePullPolicy: Always
+        # Defines a container within the pod
+        - name: dockereks  # The name of the container
+          image: 879409995620.dkr.ecr.ap-southeast-2.amazonaws.com/dockereks:1.1abb  # The Docker image for the container
+          imagePullPolicy: Always  # Specifies to always pull the image, ensuring the latest version is used
           ports:
-            - containerPort: 8080
+            # Defines a list of ports exposed by the container
+            - containerPort: 8080  # The port on which the container will listen for incoming connections
