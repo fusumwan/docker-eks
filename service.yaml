@@ -21,7 +21,7 @@ spec:
     # Defines a list of ports exposed by the service
     - protocol: TCP  # The protocol used by the service (TCP in this case)
       port: 80  # The port on which the service will be exposed
-      targetPort: 8080  # The port on the pod that the service should forward traffic to
+      targetPort: 8080  # The port on the pod that the service should forward traffic to 
 
   # The type of service
   type: LoadBalancer  # Exposes the service externally using a cloud provider's load balancer
