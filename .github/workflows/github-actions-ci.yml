@@ -1,47 +1,62 @@
+# The name of the GitHub Action workflow
 name: Node js app deploy to EKS
+
+# Specifies the event that triggers the workflow
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main" ]  # The workflow runs on pushes to the "main" branch
   pull_request:
-    branches: [ "main" ]
+    branches: [ "main" ]  # The workflow also runs on pull requests to the "main" branch
 
+# Defines the jobs that will be run as part of the workflow
 jobs:
   deploy:
+    # Specifies the operating system and version used for the job
     runs-on: ubuntu-latest
+
+    # The series of steps to be executed in the job
     steps:
     - name: Checkout code
+      # Uses the checkout action to clone the repository
       uses: actions/checkout@v3
 
     - name: Install kubectl
+      # Uses the setup-kubectl action to install kubectl, the Kubernetes command-line tool
       uses: azure/setup-kubectl@v2.0
       with:
-        version: 'v1.24.0' # default is latest stable 
-      id: install
+        version: 'v1.24.0'  # Specifies the version of kubectl to install
+      id: install  # Sets an ID for this step, which can be referenced in later steps
 
     - name: Configure AWS Credentials
+      # Uses the configure-aws-credentials action to set up AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: ap-southeast-2
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}  # Uses a secret for the AWS access key ID
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}  # Uses a secret for the AWS secret access key
+        aws-region: ap-southeast-2  # Specifies the AWS region
 
     - name: Login to Amazon ECR
-      id: login-ecr
+      # Uses the amazon-ecr-login action to log in to Amazon Elastic Container Registry (ECR)
+      id: login-ecr  # Sets an ID for this step, which can be referenced in later steps
       uses: aws-actions/amazon-ecr-login@v1
 
     - name: Build, tag, and push docker image to Amazon ECR
+      # Sets environment variables for the docker commands
       env:
-        REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        REPOSITORY: dockereks
-        IMAGE_TAG: 1.1a
+        REGISTRY: ${{ steps.login-ecr.outputs.registry }}  # The registry URL output from the login-ecr step
+        REPOSITORY: dockereks  # The name of the repository in ECR
+        IMAGE_TAG: 1.1a  # The tag for the Docker image
+      # Runs shell commands to build, tag, and push the Docker image
       run: |
-        docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
-        docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
+        docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .  # Builds the Docker image
+        docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG  # Pushes the Docker image to ECR
 
     - name: Update kube config
-      run: aws eks update-kubeconfig --name dockereks
-    
+      # Updates the kubeconfig file to use the EKS cluster
+      run: aws eks update-kubeconfig --name dockereks  # Configures kubectl to use the specified EKS cluster
+
     - name: Deploy to EKS
+      # Applies the Kubernetes deployment and service configurations
       run: |
-        kubectl apply -f deployment.yaml
-        kubectl apply -f service.yaml
+        kubectl apply -f deployment.yaml  # Applies the deployment configuration
+        kubectl apply -f service.yaml  # Applies the service configuration
