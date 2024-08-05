@@ -43,7 +43,7 @@ function getPage(message) {
     + "}\n"
     + "\n"
     + ".bgimg {\n"
-    + "  background-image: url('https://wallpapercave.com/wp/wp3709137.jpg');\n"
+    + "  background-image: url('https://as2.ftcdn.net/v2/jpg/05/18/41/91/1000_F_518419158_yXXBww2r5Z3XoutBxRX8KHNZOpPjhC03.jpg');\n"
     + "  height: 100%;\n"
     + "  background-position: center;\n"
     + "  background-size: cover;\n"
