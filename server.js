@@ -43,7 +43,7 @@ function getPage(message) {
     + "}\n"
     + "\n"
     + ".bgimg {\n"
-    + "  background-image: url('https://www.w3schools.com/w3images/forestbridge.jpg');\n"
+    + "  background-image: url('https://wallpapercave.com/wp/wp3709137.jpg');\n"
     + "  height: 100%;\n"
     + "  background-position: center;\n"
     + "  background-size: cover;\n"
