@@ -1,12 +1,27 @@
+# Specifies the API version for the service resource
 apiVersion: v1
+
+# Defines the type of Kubernetes resource, in this case, a Service
 kind: Service
+
+# Metadata provides information about the service
 metadata:
+  # The name of the service, used to identify the service within the namespace
   name: dockereks
+
+# The specification of the desired behavior of the service
 spec:
+  # The selector is used to determine which pods the service applies to
   selector:
+    # The service targets pods with the label "app: dockereks"
     app: dockereks
+
+  # Configuration of the ports that the service will expose
   ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 8080
-  type: LoadBalancer
+    # Defines a list of ports exposed by the service
+    - protocol: TCP  # The protocol used by the service (TCP in this case)
+      port: 80  # The port on which the service will be exposed
+      targetPort: 8080  # The port on the pod that the service should forward traffic to
+
+  # The type of service
+  type: LoadBalancer  # Exposes the service externally using a cloud provider's load balancer
